@@ -22,13 +22,13 @@ function getProducts() {
 
 function displayProduct(product) {     //fonction pour afficher les produits
     document.getElementById('items').innerHTML +=   //innerHTML: injecte le nouveau contenu dans le DOM // GetElementById: permet de récupérer les informations d'une balise identifiée par son Id (HTML)
-        `<a href="./product.html?_id=${product._id}">
+        `<a href="./product.html?id=${product._id}">
         <article>
             <img src="${product.imageUrl}" alt="${product.altTxt}">
             <h3 class="productName">${product.name}</h3>
             <p class="productDescription">${product.description}</p>
         </article>
-    </a>`;
+    </a>`; //lien entre un produit de la page d'accueil et la page produit & information relatif au produit
 }
 
 main(); // lancement de la fonction principale pour inserer les produits, s'exécute dès le chargement de la page
