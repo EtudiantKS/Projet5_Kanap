@@ -25,13 +25,19 @@ return fetch(`http://localhost:3000/api/products/${idProduct}`) // => chemin de 
 //Fonction pour insérer les informations du produit : 
 // Html => img src + Nom + Price + description + color //
 
-function display(product) {     //fonction pour afficher les informations du produit
+function display(product) {     //fonction pour afficher les informations du produit  
     document.querySelector(".item__img").innerHTML = //Création des informations lié à l'image dans le DOM
         `<img src="${product.imageUrl}" alt="${product.altTxt}">`
     document.getElementById ('title').innerHTML = product.name
     document.getElementById ('price').innerHTML = product.price
     document.getElementById ('description').innerHTML = product.description
+
+    //Pour le choix des coleurs => utilisation de la boucle (for / of)
+    for (const color of product.colors){
+        document.getElementById('colors').innerHTML += `<option value="${color}">${color}</option>`
+    }
 }
+
 
 //Fonction qui permet de récupérer l'id et insérer un produit et ses détails
 async function main() {
