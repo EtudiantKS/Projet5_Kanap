@@ -7,6 +7,7 @@ function getproductId() {
     return new URL(location.href).searchParams.get('id') //l'objet newURL et searchParams permettent de recupérer l'id du produit
 }
 
+
 //Fonction qui permet de récupérer les informations du produit selon son ID //
 function getProduct (idProduct) {
 return fetch(`http://localhost:3000/api/products/${idProduct}`) // => chemin de la ressource qu'on souhaite récupérer avec l'id du produit
@@ -22,6 +23,11 @@ return fetch(`http://localhost:3000/api/products/${idProduct}`) // => chemin de 
             alert(error);
         })
 }
+
+/*********************************************************************************
+    Affichage du produit et ses détails 
+**********************************************************************************/
+
 //Fonction pour insérer les informations du produit : 
 // Html => img src + Nom + Price + description + color //
 
@@ -38,6 +44,10 @@ function display(product) {     //fonction pour afficher les informations du pro
     }
 }
 
+/*********************************************************************************
+    Fonction Async 
+**********************************************************************************/
+main ()
 
 //Fonction qui permet de récupérer l'id et insérer un produit et ses détails
 async function main() {
@@ -46,11 +56,16 @@ async function main() {
    const idProduct = getproductId()  //déclaration de la constante pour distinguer l'ID du produit//
     //console.log(productId)
 
-    //Récupératiopn du produit grâce à l'id
+    //Récupération du produit grâce à l'id
     const product = await getProduct (idProduct)
 
     // Puis affichage
     display(product)   
 }
 
-main ()
+
+
+/*********************************************************************************
+   Ajouter des produits dans le panier 
+**********************************************************************************/
+
