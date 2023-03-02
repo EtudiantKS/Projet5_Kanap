@@ -28,6 +28,9 @@ return fetch(`http://localhost:3000/api/products/${idProduct}`) // => chemin de 
 function display(product) {     //fonction pour afficher les informations du produit
     document.querySelector(".item__img").innerHTML = //Création des informations lié à l'image dans le DOM
         `<img src="${product.imageUrl}" alt="${product.altTxt}">`
+    document.getElementById ('title').innerHTML = product.name
+    document.getElementById ('price').innerHTML = product.price
+    document.getElementById ('description').innerHTML = product.description
 }
 
 //Fonction qui permet de récupérer l'id et insérer un produit et ses détails
