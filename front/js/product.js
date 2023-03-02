@@ -33,8 +33,8 @@ function display(product) {     //fonction pour afficher les informations du pro
     document.getElementById ('description').innerHTML = product.description
 
     //Pour le choix des coleurs => utilisation de la boucle (for / of)
-    for (const color of product.colors){
-        document.getElementById('colors').innerHTML += `<option value="${color}">${color}</option>`
+    for (const choicecolor of product.colors){
+        document.getElementById('colors').innerHTML += `<option value="${choicecolor}">${choicecolor}</option>`
     }
 }
 
