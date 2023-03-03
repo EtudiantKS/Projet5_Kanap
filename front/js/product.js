@@ -89,4 +89,42 @@ btn_ajouterPanier.addEventListener("click",(event) => {
         quantity: quantity,
     }
     console.log(choiceProduct)
+
+
+/*********************************************************************************
+   Local Storage
+**********************************************************************************/
+
+//Stockage des données récupérer dans le local storage 
+//Déclaration de la variable "localstoragepanier" dans laquelle les valeurs qui sont dans le local strorage
+
+let localStoragepanier = JSON.parse (localStorage.getItem("panier")); 
+//JSON.parse permet de convertir les données au format JSON qui sont dans le local storage en objet JavaScript 
+//La syntaxe localStorage.getItem("panier") permet de récupérer une donnée, key= "panier" 
+
+console.log(localStoragepanier); 
+
+//il Faut vérifier en amont s'il y des données enregistrées dans le local storage 
+
+//S'il y a déjà des produits d'enregistrés dans le local storage
+
+if(localStoragepanier){
+    localStoragepanier.push(choiceProduct) //Mettre dans le tableau toutes les informations de l'utilisateur => choiceProduct (Id, qté, choix de la couleur) avec push 
+    localStorage.setItem("panier", JSON.stringify(localStoragepanier)); //Si la clé existe déja => mise a jour des valeur et Envoi dans le local Storage avec conversion en Json : JSON.stringify (en objet Javascript)
+    //La méthode localStorage.setItem() permet d'ajouter la clé et la valeur dans le stockage. 
+    console.log(localStoragepanier);
+}
+
+//S'il n'y a pas de produits enregistrés dans le local storage (création d'un tableau)
+else{
+    localStoragepanier = []; //Création d'un tableau
+    localStoragepanier.push(choiceProduct) //Mettre dans le tableau toutes les informations de l'utilisateur => choiceProduct (Id, qté, choix de la couleur) avec push 
+    localStorage.setItem("panier", JSON.stringify(localStoragepanier)); //Création de la clé et Envoi dans le local Storage avec conversion en Json : JSON.stringify (en objet Javascript)
+    //La méthode localStorage.setItem() permet d'ajouter la clé et la valeur dans le stockage.
+
+    console.log(localStoragepanier); 
+    
+
+}
+
 })
