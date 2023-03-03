@@ -63,9 +63,30 @@ async function main() {
     display(product)   
 }
 
-
-
 /*********************************************************************************
    Ajouter des produits dans le panier 
 **********************************************************************************/
 
+//Récupération des données séléctionnées par l'utilisateur et envoi du panier 
+
+//Constante pour selection du bouton "ajouter au panier" 
+const btn_ajouterPanier = document.getElementById ('addToCart')
+
+//Ecouter le bouton au click 
+btn_ajouterPanier.addEventListener("click",(event) => {
+    //On récupére l'Id du produit
+    const idProduct = getproductId()
+    //On récupére la quantité choisie par l'utilisateur
+    const quantity = document.getElementById('quantity').value
+    //On récupére la couleur choisie par l'utilisateur
+    const choicecolor = document.getElementById('colors').value
+    
+    //console.log(btn_ajouterPanier)
+
+    let choiceProduct = {
+        id: idProduct,
+        color: choicecolor,
+        quantity: quantity,
+    }
+    console.log(choiceProduct)
+})
