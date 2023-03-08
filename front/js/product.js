@@ -92,7 +92,7 @@ else {
     let choiceProduct = {
         id: idProduct,
         color: choicecolor,
-        quantity: quantity,
+        quantity: parseInt(quantity),
     }
     console.log(choiceProduct)
 
@@ -120,8 +120,11 @@ if(localStoragepanier){
         let article = localStoragepanier.find((article) => article.id == choiceProduct.id && article.color == choiceProduct.color);
  
     // Si celui-ci était déjà présent on incrémente simplement la quantité du produit correspondant dans l’array: 
-        
+        if (article){
+            const updateQuantity = article.quantity + choiceProduct.quantity; 
+            console.log(updateQuantity)
 
+        }
 
         // si l'addition du produit dépasse 100 alors on alerte l'utilisateur (1 produit d'une couleur ne peut pas être commandé plus de 100 fois)
 
