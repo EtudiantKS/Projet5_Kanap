@@ -6,3 +6,6 @@ Afficher un tableau récapitulatif des achats
 let localStoragepanier = JSON.parse(localStorage.getItem("panier"));
 console.log(localStoragepanier)
 
+//Création du tableau             
+localStoragepanier = [];
+
