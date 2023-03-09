@@ -101,14 +101,14 @@ btn_ajouterPanier.addEventListener("click",(event) => {
         **********************************************************************************/
 
         //Stockage des données récupérer dans le local storage 
-        //Déclaration de la variable "localstoragepanier" dans laquelle les valeurs qui sont dans le local storage
+        //Déclaration de la variable "localstoragepanier" dans laquelle on met les valeurs qui sont dans le local storage
 
         let localStoragepanier = JSON.parse (localStorage.getItem("panier")); 
         //JSON.parse permet de convertir les données au format JSON qui sont dans le local storage en objet JavaScript 
         //La syntaxe localStorage.getItem("panier") permet de récupérer une donnée, key= "panier" 
         //console.log(localStoragepanier); 
 
-        //Stockage des données récupérer dans le local storage :
+        //Stockage des données récupérées dans le local storage :
 
         //il Faut vérifier en amont s'il y des données enregistrées dans le local storage 
 
@@ -124,7 +124,7 @@ btn_ajouterPanier.addEventListener("click",(event) => {
 
             // si l'addition du produit dépasse 100 alors on alerte l'utilisateur (1 produit d'une couleur ne peut pas être commandé plus de 100 fois)
             if (updateQuantity > 100){
-                return alert ("il n'est pas possible de commander un même produit en plus de 100 exemplaires")
+                return alert ("Il n'est pas possible de commander plus de 100 exemplaires d'un même produit.")
             }
 
             // si l'addition du produit ne dépasse pas 100 on réassigne la quantité
