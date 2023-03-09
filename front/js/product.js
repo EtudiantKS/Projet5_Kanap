@@ -83,17 +83,16 @@ btn_ajouterPanier.addEventListener("click",(event) => {
     
     //console.log(btn_ajouterPanier)
 
-//S'assurer qu'une couleur et une quantité soit choisie  (qté entre 1 et 100)
-
-if (choicecolor === "" || quantity < 1 || quantity > 100 || quantity === "") {
+    //S'assurer qu'une couleur et une quantité soit choisie  (qté entre 1 et 100)
+    if (choicecolor === "" || quantity < 1 || quantity > 100 || quantity === "") {
     alert(`Merci de sélectionner une couleur et/ou une quantité valide. La quantité doit être comprise en 1 et 100`);
-} 
-else {
-    let choiceProduct = {
-        id: idProduct,
-        color: choicecolor,
-        quantity: parseInt(quantity),
-    }
+    } 
+    else {
+        let choiceProduct = {
+            id: idProduct,
+            color: choicecolor,
+            quantity: parseInt(quantity),
+        }
     console.log(choiceProduct)
 
 
@@ -104,49 +103,54 @@ else {
 //Stockage des données récupérer dans le local storage 
 //Déclaration de la variable "localstoragepanier" dans laquelle les valeurs qui sont dans le local storage
 
-let localStoragepanier = JSON.parse (localStorage.getItem("panier")); 
-//JSON.parse permet de convertir les données au format JSON qui sont dans le local storage en objet JavaScript 
-//La syntaxe localStorage.getItem("panier") permet de récupérer une donnée, key= "panier" 
-//console.log(localStoragepanier); 
+        let localStoragepanier = JSON.parse (localStorage.getItem("panier")); 
+        //JSON.parse permet de convertir les données au format JSON qui sont dans le local storage en objet JavaScript 
+        //La syntaxe localStorage.getItem("panier") permet de récupérer une donnée, key= "panier" 
+        //console.log(localStoragepanier); 
 
 //Stockage des données récupérer dans le local storage :
 
 //il Faut vérifier en amont s'il y des données enregistrées dans le local storage 
 
-//S'il y a déjà des produits d'enregistrés dans le local storage il faut vérifier certaines conditions:
-if(localStoragepanier){
-// On verifie si un produit est présent dans le local Storage avec le (même id + même couleur)
-    //La find()méthode exécute une fonction pour chaque élément du tableau.
-        let article = localStoragepanier.find((article) => article.id == choiceProduct.id && article.color == choiceProduct.color);
- 
-    // Si celui-ci était déjà présent on incrémente simplement la quantité du produit correspondant dans l’array: 
-        if (article){
-            const updateQuantity = article.quantity + choiceProduct.quantity; 
-            console.log(updateQuantity)
+    //S'il y a déjà des produits d'enregistrés dans le local storage il faut vérifier certaines conditions:
+        if(localStoragepanier){
+        // On verifie si un produit est présent dans le local Storage avec le (même id + même couleur)
+        //La find()méthode exécute une fonction pour chaque élément du tableau.
+            let article = localStoragepanier.find((article) => article.id == choiceProduct.id && article.color == choiceProduct.color);
+            // Si celui-ci était déjà présent on incrémente simplement la quantité du produit correspondant dans l’array: 
+            if (article){
+                const updateQuantity = article.quantity + choiceProduct.quantity; 
+                console.log(updateQuantity)
 
+            // si l'addition du produit dépasse 100 alors on alerte l'utilisateur (1 produit d'une couleur ne peut pas être commandé plus de 100 fois)
+            if (updateQuantity > 100){
+                return alert ("il n'est pas possible de commander un même produit en plus de 100 exemplaires")
+            }
+
+            // si l'addition du produit ne dépasse pas 100 on réassigne la quantité
+            article.quantity = updateQuantity;
+
+            localStorage.setItem("panier", JSON.stringify(localStoragepanier));
+            }
+
+
+            //Si le produit n'existe pas dans le local storage on le push dans le array
+            else {localStoragepanier.push(choiceProduct) //Mettre dans le tableau toutes les informations de l'utilisateur => choiceProduct (Id, qté, choix de la couleur) avec push 
+            localStorage.setItem("panier", JSON.stringify(localStoragepanier)); //conversion en Json : JSON.stringify (en objet Javascript)
+            //La méthode localStorage.setItem() permet d'ajouter la clé et la valeur dans le stockage. 
+            //console.log(localStoragepanier);
+            }
         }
 
-        // si l'addition du produit dépasse 100 alors on alerte l'utilisateur (1 produit d'une couleur ne peut pas être commandé plus de 100 fois)
+        //S'il n'y a pas de produits enregistrés dans le local storage (création d'un tableau):
+        else{
+            
+            localStoragepanier = []; //Création d'un tableau
+            localStoragepanier.push(choiceProduct) //Mettre dans le tableau toutes les informations de l'utilisateur => choiceProduct (Id, qté, choix de la couleur) avec push 
+            localStorage.setItem("panier", JSON.stringify(localStoragepanier)); //Création de la clé et Envoi dans le local Storage avec conversion en Json : JSON.stringify (en objet Javascript)
+            //La méthode localStorage.setItem() permet d'ajouter la clé et la valeur dans le stockage.
 
-        // si l'addition du produit ne dépasse pas 100 on réassigne la quantité
-
-    // Si le produit n'existe pas dans le local storage on le push dans le array
-    localStoragepanier.push(choiceProduct) //Mettre dans le tableau toutes les informations de l'utilisateur => choiceProduct (Id, qté, choix de la couleur) avec push 
-    localStorage.setItem("panier", JSON.stringify(localStoragepanier)); //Si la clé existe déja => mise a jour des valeurs et Envoi dans le local Storage avec conversion en Json : JSON.stringify (en objet Javascript)
-    //La méthode localStorage.setItem() permet d'ajouter la clé et la valeur dans le stockage. 
-    //console.log(localStoragepanier);
-}
-
-
-
-//S'il n'y a pas de produits enregistrés dans le local storage (création d'un tableau):
-else{
-    localStoragepanier = []; //Création d'un tableau
-    localStoragepanier.push(choiceProduct) //Mettre dans le tableau toutes les informations de l'utilisateur => choiceProduct (Id, qté, choix de la couleur) avec push 
-    localStorage.setItem("panier", JSON.stringify(localStoragepanier)); //Création de la clé et Envoi dans le local Storage avec conversion en Json : JSON.stringify (en objet Javascript)
-    //La méthode localStorage.setItem() permet d'ajouter la clé et la valeur dans le stockage.
-
-    //console.log(localStoragepanier); 
-    
-
-}}})
+            //console.log(localStoragepanier); 
+        }
+    }
+})
