@@ -93,26 +93,26 @@ btn_ajouterPanier.addEventListener("click",(event) => {
             color: choicecolor,
             quantity: parseInt(quantity),
         }
-    console.log(choiceProduct)
+        console.log(choiceProduct)
 
 
-/*********************************************************************************
-   Local Storage
-**********************************************************************************/
+        /*********************************************************************************
+            Local Storage
+        **********************************************************************************/
 
-//Stockage des données récupérer dans le local storage 
-//Déclaration de la variable "localstoragepanier" dans laquelle les valeurs qui sont dans le local storage
+        //Stockage des données récupérer dans le local storage 
+        //Déclaration de la variable "localstoragepanier" dans laquelle les valeurs qui sont dans le local storage
 
         let localStoragepanier = JSON.parse (localStorage.getItem("panier")); 
         //JSON.parse permet de convertir les données au format JSON qui sont dans le local storage en objet JavaScript 
         //La syntaxe localStorage.getItem("panier") permet de récupérer une donnée, key= "panier" 
         //console.log(localStoragepanier); 
 
-//Stockage des données récupérer dans le local storage :
+        //Stockage des données récupérer dans le local storage :
 
-//il Faut vérifier en amont s'il y des données enregistrées dans le local storage 
+        //il Faut vérifier en amont s'il y des données enregistrées dans le local storage 
 
-    //S'il y a déjà des produits d'enregistrés dans le local storage il faut vérifier certaines conditions:
+        //S'il y a déjà des produits d'enregistrés dans le local storage il faut vérifier certaines conditions:
         if(localStoragepanier){
         // On verifie si un produit est présent dans le local Storage avec le (même id + même couleur)
         //La find()méthode exécute une fonction pour chaque élément du tableau.
@@ -151,6 +151,11 @@ btn_ajouterPanier.addEventListener("click",(event) => {
             //La méthode localStorage.setItem() permet d'ajouter la clé et la valeur dans le stockage.
 
             //console.log(localStoragepanier); 
+
         }
+        //Une fois les conditions vérifiées, le produit est ajouté et l'utilisateur est renvoyé vers la page panier.
+        //document.getElementById('addToCart').innerHTML = 'Produit ajouté au panier';
+        window.alert("Votre produit a bien été ajouté à votre panier")
+        //window.location.href = "cart.html"
     }
 })
