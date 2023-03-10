@@ -6,48 +6,66 @@
 let localStoragepanier = JSON.parse(localStorage.getItem("panier"));
 console.log(localStoragepanier)
 
-//Création du tableau             
-tablePanier = [];
-
-
+// on récupère les données supplémentaires via l'API (pour récupérer le nom, l'image, le prix)
+function getProduct (idProduct) {
+    return fetch(`http://localhost:3000/api/products/${idProduct}`) // => chemin de la ressource qu'on souhaite récupérer avec l'id du produit
+        .then(function (response) {  // retour positive 
+            return response.json()  // récupération du résultat de la requête au format json 
+        })
+        .then(function (products) {  // récupèration de la valeur du résultat json précédent 
+            return products
+            //return console.table(products)
+        })
+        .catch(function (error) {  // Retour négatif 
+            error = `Un problème est survenu lors du chargement, veuillez rafraîchir la page.`; // Affichage du message d'erreur
+            alert(error);
+            })
+}
 
 /*********************************************************************************
-    Gestion du panier => Affichage du produit du panier 
+    Gestion du panier => Affichage des produits dans le panier 
 **********************************************************************************/
 
-//Si le panier est vide: Message à l'utilisateur 
-if(localStoragepanier === null || localStoragepanier.length === 0){
-    document.querySelector('h1').innerHTML = 'Votre panier est actuellement vide';
 
- 
-//Si le panier n'est pas vide: Affichage des produits du local Storage
-} 
-else{
-
-    for(i=0; i<localStoragepanier.length; i++){
-        document.getElementById('cart__items').innerHTML +=
-        `<article class="cart__item" data-id="${localStoragepanier.idProduct}" data-color="${localStoragepanier.choicecolor}">
-            <div class="cart__item__img">
-              <img src="${localStoragepanier.imageUrl}" alt="${localStoragepanier.altTxt}">
-            </div>
-            <div class="cart__item__content">
-              <div class="cart__item__content__description">
-                <h2>${localStoragepanier.name}</h2>
-                <p>${localStoragepanier.choicecolor}</p>
-                <p>${localStoragepanier.price}€</p>
-              </div>
-              <div class="cart__item__content__settings">
-                <div class="cart__item__content__settings__quantity">
-                  <p>Qté : </p>
-                  <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="${localStoragepanier.quantity}">
-                </div>
-                <div class="cart__item__content__settings__delete">
-                  <p class="deleteItem">Supprimer</p>
-                </div>
-              </div>
-            </div>
-          </article>
-        `;}
-        //if(i == localStoragepanier.length){}
-
+async function displayPanier (){
+    //Si le panier est vide: Message à l'utilisateur     
+    if(localStoragepanier === null || localStoragepanier.length === 0){
+        document.querySelector('h1').innerHTML = 'Votre panier est actuellement vide';
     }
+    //Si le panier n'est pas vide: On récupére les informations des produits   
+    else{
+        //boucle pour récupérer l'ensemble des informations du LS et API 
+        for(i=0; i<localStoragepanier.length; i++){
+            let article = localStoragepanier[i]
+            //console.table(localStoragepanier);
+
+            //Constante pour les informations des articles
+            productData = await getProduct(article.id);
+            document.getElementById('cart__items').innerHTML +=
+            //id, color et quantity proviennent du Local Storage et le reste de l'API 
+            `<article class="cart__item" data-id="${article.id}" data-color="${article.color}">
+                <div class="cart__item__img">
+                <img src="${productData.imageUrl}" alt="${productData.altTxt}">
+                </div>
+                <div class="cart__item__content">
+                <div class="cart__item__content__description">
+                    <h2>${productData.name}</h2>
+                    <p>${article.color}</p>
+                    <p>${productData.price}€</p>
+                </div>
+                <div class="cart__item__content__settings">
+                    <div class="cart__item__content__settings__quantity">
+                    <p>Qté : </p>
+                    <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="${article.quantity}">
+                    </div>
+                    <div class="cart__item__content__settings__delete">
+                    <p class="deleteItem">Supprimer</p>
+                    </div>
+                </div>
+                </div>
+            </article>`;
+        }
+    }
+}
+
+displayPanier();
