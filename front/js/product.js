@@ -3,7 +3,7 @@
 **********************************************************************************/
 
 //Fonction qui permet de récupérer l'ID du produit //
-function getproductId() { 
+function getProductId() { 
     return new URL(location.href).searchParams.get('id') //l'objet newURL et searchParams permettent de recupérer l'id du produit
 }
 
@@ -22,6 +22,7 @@ return fetch(`http://localhost:3000/api/products/${idProduct}`) // => chemin de 
             error = `Un problème est survenu lors du chargement, veuillez rafraîchir la page.`; // Affichage du message d'erreur
             alert(error);
         })
+
 }
 
 /*********************************************************************************
@@ -39,8 +40,8 @@ function display(product) {     //fonction pour afficher les informations du pro
     document.getElementById ('description').innerHTML = product.description
 
     //Pour le choix des coleurs => utilisation de la boucle (for / of)
-    for (const choicecolor of product.colors){
-        document.getElementById('colors').innerHTML += `<option value="${choicecolor}">${choicecolor}</option>`
+    for (const choiceColor of product.colors){
+        document.getElementById('colors').innerHTML += `<option value="${choiceColor}">${choiceColor}</option>`
     }
 }
 
@@ -53,7 +54,7 @@ main ()
 async function main() {
     
     //Récupération de l'id du produit dans l'url
-   const idProduct = getproductId()  //déclaration de la constante pour distinguer l'ID du produit//
+   const idProduct = getProductId()  //déclaration de la constante pour distinguer l'ID du produit//
     //console.log(productId)
 
     //Récupération du produit grâce à l'id
@@ -84,13 +85,13 @@ btn_ajouterPanier.addEventListener("click",(event) => {
     //console.log(btn_ajouterPanier)
 
     //S'assurer qu'une couleur et une quantité soit choisie  (qté entre 1 et 100)
-    if (choicecolor === "" || quantity < 1 || quantity > 100 || quantity === "") {
+    if (choiceColor === "" || quantity < 1 || quantity > 100 || quantity === "") {
     alert(`Merci de sélectionner une couleur et/ou une quantité valide. La quantité doit être comprise en 1 et 100`);
     } 
     else {
         let choiceProduct = {
             id: idProduct,
-            color: choicecolor,
+            color: choiceColor,
             quantity: parseInt(quantity),
         }
         console.log(choiceProduct)
