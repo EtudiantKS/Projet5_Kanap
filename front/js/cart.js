@@ -69,3 +69,22 @@ async function displayPanier (){
 }
 
 displayPanier();
+
+/*********************************************************************************
+    Gestion du panier => Modifier la quantité d'un produit depuis le panier
+**********************************************************************************/
+
+//Déclaration pour la nouvelle quantité
+let articleQuantity = document.querySelectorAll('.itemQuantity');
+
+//Boucle pour chaque modification de la quantité
+
+for (q = 0; q < itemQty.length; q++) {
+    articleQuantity[q].addEventListener('change', (event) => {
+
+      let articleQuantity = articleQuantity[q].value;
+      let articleQuantity = document.getElementById('totalQuantity');
+
+      const choiceQuantity = {
+    });
+  }

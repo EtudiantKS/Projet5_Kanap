@@ -76,11 +76,11 @@ const btn_ajouterPanier = document.getElementById ('addToCart')
 //Ecouter le bouton au click 
 btn_ajouterPanier.addEventListener("click",(event) => {
     //On récupére l'Id du produit
-    const idProduct = getproductId()
+    const idProduct = getProductId()
     //On récupére la quantité choisie par l'utilisateur
     const quantity = document.getElementById('quantity').value
     //On récupére la couleur choisie par l'utilisateur
-    const choicecolor = document.getElementById('colors').value
+    const choiceColor = document.getElementById('colors').value
     
     //console.log(btn_ajouterPanier)
 
