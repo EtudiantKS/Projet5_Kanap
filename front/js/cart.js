@@ -64,6 +64,8 @@ async function displayPanier (){
                 </div>
                 </div>
             </article>`;
+        
+            changeQuantity();
         }
     }
 }
@@ -73,18 +75,32 @@ displayPanier();
 /*********************************************************************************
     Gestion du panier => Modifier la quantité d'un produit depuis le panier
 **********************************************************************************/
+//fonction pour modifier la quantité
+function changeQuantity() {
 
-//Déclaration pour la nouvelle quantité
-let articleQuantity = document.querySelectorAll('.itemQuantity');
+    //Déclaration pour la nouvelle quantité et modification dans le DOM
+    let articleQuantity = document.querySelectorAll('.itemQuantity');
 
-//Boucle pour chaque modification de la quantité
+    //Boucle pour chaque modification de la quantité
+    for (let q = 0; q < articleQuantity.length; q++) {
+        articleQuantity[q].addEventListener('change', (event) => {
 
-for (q = 0; q < itemQty.length; q++) {
-    articleQuantity[q].addEventListener('change', (event) => {
+            let newarticleQuantity = articleQuantity[q].value;
 
-      let articleQuantity = articleQuantity[q].value;
-      let articleQuantity = document.getElementById('totalQuantity');
-
-      const choiceQuantity = {
-    });
-  }
+            const choiceQuantity = {
+                id: localStoragepanier[q].id,
+                quantity: parseInt(newarticleQuantity),
+            }
+            //Si la quantité ne respecte pas les conditions suivantes, alors alerte à l'utilisateur
+            if(newarticleQuantity> 100 || newarticleQuantity <= 0|| newarticleQuantity === ""){
+                alert (`Merci de sélectionner une quantité valide. La quantité doit être comprise en 1 et 100`);
+            }
+            //Si la quantité est conforme alors on stocke dans le LS
+            else {
+            localStoragepanier[q] = choiceQuantity;
+            localStorage.setItem("panier", JSON.stringify(localStoragepanier));
+            }
+        });
+    }
+}
+  
