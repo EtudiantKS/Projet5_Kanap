@@ -4,7 +4,7 @@
 //Récupération des produits du Local Storage sous forme de tableau
 
 let localStoragepanier = JSON.parse(localStorage.getItem("panier"));
-console.log(localStoragepanier)
+//console.log(localStoragepanier)
 
 // on récupère les données supplémentaires via l'API (pour récupérer le nom, l'image, le prix)
 function getProduct (idProduct) {
@@ -66,6 +66,7 @@ async function displayPanier (){
             </article>`;
         
             changeQuantity();
+            deleteProduct();
         }
     }
 }
@@ -88,7 +89,7 @@ function changeQuantity() {
             let newarticleQuantity = articleQuantity[q].value;
 
             const choiceQuantity = {
-                id: localStoragepanier[q].id,
+                id: localStoragepanier[q].id, 
                 quantity: parseInt(newarticleQuantity),
             }
             //Si la quantité ne respecte pas les conditions suivantes, alors alerte à l'utilisateur
@@ -99,8 +100,44 @@ function changeQuantity() {
             else {
             localStoragepanier[q] = choiceQuantity;
             localStorage.setItem("panier", JSON.stringify(localStoragepanier));
+            alert("La quantité de votre produit a bien été mise à jour")
             }
         });
     }
 }
-  
+/*********************************************************************************
+    Gestion du panier => Supprimer un produit depuis le panier
+**********************************************************************************/
+
+function deleteProduct() {
+    // Déclaration de suppression du produit via les boutons présent dans le DOM
+    let deleteBouton = document.querySelectorAll('.deleteItem');
+    //console.log(deleteBouton);
+
+        //Boucle pour chaque chaque élement du tableau 
+        for (let s = 0; s < deleteBouton.length; s++) {
+            deleteBouton[s].addEventListener("click", (event) =>{
+                event.preventDefault(); 
+
+                //sélection de l'id du produit qui va être sup^primer en cliquand sur le bouton : 
+                let id_delete = localStoragepanier[s].id;
+                let color_delete = localStoragepanier[s].color;
+                //console.log(id_delete); 
+
+                //avec la méthode filtre => séléction des éléments à garder et suppression de l'élément où le bouton a été cliqué
+                localStoragepanier = localStoragepanier.filter(
+                    (el) => el.id !== id_delete || el.color !== color_delete
+                ); 
+                //console.log(localStoragepanier);
+
+                // envoi de la variable dans le local Storage
+                // transformation en format JSON et envoi de la Key'panier" du localStorage 
+                localStorage.setItem("panier", JSON.stringify(localStoragepanier));
+
+                //alert pour avertir que le produit a été supprimer & rafraîchissement de la page 
+                alert("Le produit a bien été supprimer du panier"); 
+                window.location.href = "cart.html"
+
+            });
+        }
+}
