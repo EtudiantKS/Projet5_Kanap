@@ -84,12 +84,12 @@ function changeQuantity() {
 
     //Boucle pour chaque modification de la quantité
     for (let q = 0; q < articleQuantity.length; q++) {
-        articleQuantity[q].addEventListener('change', (event) => {
-
+        articleQuantity[q].addEventListener("change", (event) => {
             let newarticleQuantity = articleQuantity[q].value;
 
             const choiceQuantity = {
                 id: localStoragepanier[q].id, 
+                color: choiceColor,
                 quantity: parseInt(newarticleQuantity),
             }
             //Si la quantité ne respecte pas les conditions suivantes, alors alerte à l'utilisateur
@@ -119,7 +119,7 @@ function deleteProduct() {
             deleteBouton[s].addEventListener("click", (event) =>{
                 event.preventDefault(); 
 
-                //sélection de l'id du produit qui va être sup^primer en cliquand sur le bouton : 
+                //sélection de l'id du produit qui va être supprimer en cliquant sur le bouton : 
                 let id_delete = localStoragepanier[s].id;
                 let color_delete = localStoragepanier[s].color;
                 //console.log(id_delete); 
@@ -141,3 +141,7 @@ function deleteProduct() {
             });
         }
 }
+
+/*********************************************************************************
+    Gestion du panier => Calcul de la somme totale du panier
+**********************************************************************************/
