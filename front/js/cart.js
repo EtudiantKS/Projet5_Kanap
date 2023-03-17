@@ -102,6 +102,8 @@ function changeQuantity() {
             localStorage.setItem("panier", JSON.stringify(localStoragepanier));
             alert("La quantité de votre produit a bien été mise à jour")
             }
+            // Mise a jour du prix du panier suite aux modifications
+            totalpanier();
         });
     }
 }
