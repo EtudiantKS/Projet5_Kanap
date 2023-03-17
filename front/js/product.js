@@ -54,7 +54,7 @@ main ()
 async function main() {
     
     //Récupération de l'id du produit dans l'url
-   const idProduct = getProductId()  //déclaration de la constante pour distinguer l'ID du produit//
+    const idProduct = getProductId()  //déclaration de la constante pour distinguer l'ID du produit//
     //console.log(productId)
 
     //Récupération du produit grâce à l'id

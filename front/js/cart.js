@@ -89,7 +89,7 @@ function changeQuantity() {
 
             const choiceQuantity = {
                 id: localStoragepanier[q].id, 
-                color: choiceColor,
+                color: localStoragepanier[q].color,
                 quantity: parseInt(newarticleQuantity),
             }
             //Si la quantité ne respecte pas les conditions suivantes, alors alerte à l'utilisateur
@@ -114,7 +114,7 @@ function deleteProduct() {
     let deleteBouton = document.querySelectorAll('.deleteItem');
     //console.log(deleteBouton);
 
-        //Boucle pour chaque chaque élement du tableau 
+        //Boucle pour chaque élement du tableau 
         for (let s = 0; s < deleteBouton.length; s++) {
             deleteBouton[s].addEventListener("click", (event) =>{
                 event.preventDefault(); 
@@ -145,3 +145,29 @@ function deleteProduct() {
 /*********************************************************************************
     Gestion du panier => Calcul de la somme totale du panier
 **********************************************************************************/
+async function totalpanier() {
+    //Déclaration des variables (priceTotal & quantityTotal) en tant que nombre
+    let priceTotal = 0; 
+    let quantityTotal = 0; 
+
+    //L'opérateur d'inégalité (!=) vérifie si les deux opérandes ne sont pas égaux 
+    if(localStoragepanier.length !=0){
+        for (let p = 0; p < localStoragepanier.length; p++){
+            let infoStorage = localStoragepanier[p]; 
+            let article = await getProduct(infoStorage.id); 
+            priceTotal += parseInt (infoStorage.quantity) * parseInt (article.price); 
+            quantityTotal += parseInt (infoStorage.quantity);
+        }
+
+    }
+    // injecte le nouveau contenu dans le DOM 
+    let finalQuantity = document.getElementById('totalQuantity');
+    finalQuantity.innerHTML = quantityTotal;
+  
+    let finalPrice = document.getElementById('totalPrice');
+    finalPrice.innerHTML =  priceTotal;
+
+}
+ //déclaration de la fonction asynchrone 
+totalpanier();
+
