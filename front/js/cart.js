@@ -173,3 +173,34 @@ async function totalpanier() {
  //déclaration de la fonction asynchrone 
 totalpanier();
 
+/*********************************************************************************
+   Validation des données dans le formulaire
+**********************************************************************************/
+
+//let form =  document.getElementById('email');
+
+//console.log(form.email);
+//Ecouter la modification de l'email 
+///form.email.addEventListener('change',function(){
+    //validEmail(this); 
+///}); 
+
+//const validEmail = fonction(inputEmail) {
+    //let emailRegExp = new RegExp(
+        //'^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z][2,10}$', 'g'
+      //^ début de la chaîne de caractère autorisée 
+        //[a-z: de a à z en minuscule, de A-Z en majuscule 0-9: des chiffres de 0à 9, .-_ : caractères autorisés]
+        //+ permet de dire que ces caractères peuvent être écrit une fois ou plrs fois
+        //[@]{1} on doit trouvé l'@ une seule fois
+        //[a-zA-Z0-9.-_]+ : autorisation après l'@
+        // [.]{1} le point a retrouver qu'une seule fois 
+        // [a-z]: signfie qu'après le . uniquement en minuscule [2,10} et nombre de lettres autorisées : 2min 10max
+        // $ fin de notre expresion régulière
+        // lors d'une regexp, il faut un marqueur => comment lire la regexp : 'g' pour global 
+
+    //);
+    
+    //let testEmail = emailRegExp.test(inputEmail.value);
+    //console.log(testEmail)
+//};
+
