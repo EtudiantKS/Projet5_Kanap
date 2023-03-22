@@ -103,7 +103,7 @@ function changeQuantity() {
             alert("La quantité de votre produit a bien été mise à jour")
             }
             // Mise a jour du prix du panier suite aux modifications
-            totalpanier();
+            totalPanier();
         });
     }
 }
@@ -147,7 +147,7 @@ function deleteProduct() {
 /*********************************************************************************
     Gestion du panier => Calcul de la somme totale du panier
 **********************************************************************************/
-async function totalpanier() {
+async function totalPanier() {
     //Déclaration des variables (priceTotal & quantityTotal) en tant que nombre
     let priceTotal = 0; 
     let quantityTotal = 0; 
@@ -157,8 +157,8 @@ async function totalpanier() {
         for (let p = 0; p < localStoragepanier.length; p++){
             let infoStorage = localStoragepanier[p]; 
             let article = await getProduct(infoStorage.id); 
-            priceTotal += parseInt (infoStorage.quantity) * parseInt (article.price); 
-            quantityTotal += parseInt (infoStorage.quantity);
+            priceTotal +=  infoStorage.quantity * article.price; //Calcul du prix total
+            quantityTotal +=  infoStorage.quantity; //Donne la quantité des articles 
         }
 
     }
@@ -171,7 +171,7 @@ async function totalpanier() {
 
 }
  //déclaration de la fonction asynchrone 
-totalpanier();
+totalPanier();
 
 /*********************************************************************************
    Validation des données dans le formulaire
