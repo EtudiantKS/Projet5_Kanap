@@ -35,12 +35,12 @@ async function displayPanier (){
     //Si le panier n'est pas vide: On récupére les informations des produits   
     else{
         //boucle pour récupérer l'ensemble des informations du LS et API 
-        for(i=0; i<localStoragepanier.length; i++){
+        for(let i=0; i<localStoragepanier.length; i++){
             let article = localStoragepanier[i]
             //console.table(localStoragepanier);
 
             //Constante pour les informations des articles
-            productData = await getProduct(article.id);
+             let productData = await getProduct(article.id);
             document.getElementById('cart__items').innerHTML +=
             //id, color et quantity proviennent du Local Storage et le reste de l'API 
             `<article class="cart__item" data-id="${article.id}" data-color="${article.color}">
@@ -154,13 +154,16 @@ async function totalPanier() {
 
     //L'opérateur d'inégalité (!=) vérifie si les deux opérandes ne sont pas égaux 
     if(localStoragepanier.length !=0){
-        for (let p = 0; p < localStoragepanier.length; p++){
-            let infoStorage = localStoragepanier[p]; 
-            let article = await getProduct(infoStorage.id); 
-            priceTotal +=  infoStorage.quantity * article.price; //Calcul du prix total
-            quantityTotal +=  infoStorage.quantity; //Donne la quantité des articles 
+        //boucle pour récupérer l'ensemble des informations du LS et API 
+        for(let i=0; i<localStoragepanier.length; i++){
+            let article = localStoragepanier[i]
+            //Constante pour les informations des articles
+            let productData = await getProduct(article.id);
+            //Calcul du prix total
+            priceTotal +=  article.quantity * productData.price;
+            //Donne la quantité des articles  
+            quantityTotal +=  article.quantity; 
         }
-
     }
     // injecte le nouveau contenu dans le DOM 
     let finalQuantity = document.getElementById('totalQuantity');
