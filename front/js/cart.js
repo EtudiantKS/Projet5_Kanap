@@ -85,6 +85,8 @@ function changeQuantity() {
     //Boucle pour chaque modification de la quantité
     for (let q = 0; q < articleQuantity.length; q++) {
         articleQuantity[q].addEventListener("change", (event) => {
+            event.preventDefault (); //ne rien faire s'il n'ya pas de click
+
             let newarticleQuantity = articleQuantity[q].value;
 
             const choiceQuantity = {
@@ -148,7 +150,7 @@ function deleteProduct() {
     Gestion du panier => Calcul de la somme totale du panier
 **********************************************************************************/
 async function totalPanier() {
-    //Déclaration des variables (priceTotal & quantityTotal) en tant que nombre
+    //Déclaration des variables (priceTotal & quantityTotal) en tant que nombre par défaut
     let priceTotal = 0; 
     let quantityTotal = 0; 
 
@@ -171,28 +173,56 @@ async function totalPanier() {
   
     let finalPrice = document.getElementById('totalPrice');
     finalPrice.innerHTML =  priceTotal;
-
 }
+
  //déclaration de la fonction asynchrone 
 totalPanier();
 
-/*********************************************************************************
-   Validation des données dans le formulaire
-**********************************************************************************/
+/***************************************************************************************************
+   Récupération et Validation des données dans le formulaire puis stockage dans le Local Strorage
+****************************************************************************************************/
 
-//let form =  document.getElementById('email');
+///Déclaration des constantes pour séléctionner dans le DOM 
+const firstNameInput = document.getElementById('firstName');
 
-//console.log(form.email);
-//Ecouter la modification de l'email 
-///form.email.addEventListener('change',function(){
-    //validEmail(this); 
-///}); 
+const lastNameInput = document.getElementById('lastName');
 
-//const validEmail = fonction(inputEmail) {
-    //let emailRegExp = new RegExp(
-        //'^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z][2,10}$', 'g'
+const addressInput = document.getElementById('address');
+
+const cityInput = document.getElementById('city');
+
+const emailInput = document.getElementById('email');
+  
+
+// on vient cibler le btn 'commander' du formulaire
+const orderBouton = document.getElementById('order');
+
+//au click
+orderBouton.addEventListener('click', (event) => {
+event.preventDefault();
+
+let informations = {   //Récupérer les valeurs du formulaire dans un objet / une seule clé
+  firstName: firstNameInput.value, //document.getElementById('firstName').value
+  lastName: lastNameInput.value,
+  address: addressInput.value,
+  city: cityInput.value,
+  email: emailInput.value
+};
+
+
+//Récupération du formulaire pour le mettre ds le local storage
+localStorage.setItem('contact', JSON.stringify(informations)); // JSON.stringify=> convertir l'objet (contact) en chaine de caractère
+
+}
+)
+
+//gestion validation du formulaire 
+
+//Regex mail:
+        //'^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z][2,10]$', 'g'
       //^ début de la chaîne de caractère autorisée 
         //[a-z: de a à z en minuscule, de A-Z en majuscule 0-9: des chiffres de 0à 9, .-_ : caractères autorisés]
+        //\w: Indique un caractère alphanumérique ou un tiret de soulignement. Cela correspond à taper [a-zA-Z0-9_]
         //+ permet de dire que ces caractères peuvent être écrit une fois ou plrs fois
         //[@]{1} on doit trouvé l'@ une seule fois
         //[a-zA-Z0-9.-_]+ : autorisation après l'@
@@ -200,10 +230,3 @@ totalPanier();
         // [a-z]: signfie qu'après le . uniquement en minuscule [2,10} et nombre de lettres autorisées : 2min 10max
         // $ fin de notre expresion régulière
         // lors d'une regexp, il faut un marqueur => comment lire la regexp : 'g' pour global 
-
-    //);
-    
-    //let testEmail = emailRegExp.test(inputEmail.value);
-    //console.log(testEmail)
-//};
-
