@@ -154,10 +154,11 @@ async function totalPanier() {
     let priceTotal = 0; 
     let quantityTotal = 0; 
 
+
     //L'opérateur d'inégalité (!=) vérifie si les deux opérandes ne sont pas égaux 
-    if(localStoragepanier.length !=0){
+    if(localStoragepanier !=0 || localStoragepanier != null){
         //boucle pour récupérer l'ensemble des informations du LS et API 
-        for(let i=0; i<localStoragepanier.length; i++){
+        for(i=0; i<localStoragepanier.length; i++){
             let article = localStoragepanier[i]
             //Constante pour les informations des articles
             let productData = await getProduct(article.id);
@@ -209,18 +210,71 @@ let informations = {   //Récupérer les valeurs du formulaire dans un objet / u
   email: emailInput.value
 };
 
+  //Utilisation des Regex pour verifier les données des champs du formulaire & affichage d'un message d'erreur si besoin  
 
-//Récupération du formulaire pour le mettre ds le local storage
-localStorage.setItem('contact', JSON.stringify(informations)); // JSON.stringify=> convertir l'objet (contact) en chaine de caractère
-
-}
-)
-
-//gestion validation du formulaire 
-
-//Regex mail:
-        //'^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z][2,10]$', 'g'
-      //^ début de la chaîne de caractère autorisée 
+  function controlePrenom(){
+    //Controle du prenom
+    const firstNameInputcontrole = firstNameInput.value;
+    if(/^[A-Za-z][A-Za-z\é\è\ê\ë\ï\œ\-\s]+$/.test(firstNameInputcontrole)){
+      document.getElementById('firstNameErrorMsg').textContent = ""; // si ok, ne plus afficher le message d'alerte
+      return true;
+    }else{
+      document.getElementById('firstNameErrorMsg').textContent = "Veuillez remplir ce champs";  // pour avoir une alerte sous le champs concerné
+      return false;
+    }
+    };
+    
+    function controleNom(){
+      //Controle du nom
+      const lastNameInputcontrole = lastNameInput.value;
+      if(/^[A-Za-z][A-Za-z\é\è\ê\ë\ï\œ\-\s]+$/.test(lastNameInputcontrole)){
+        document.getElementById('lastNameErrorMsg').textContent = ""; // si ok, ne plus afficher le message d'alerte
+        return true;
+      }else{
+        document.getElementById('lastNameErrorMsg').textContent = "Veuillez remplir ce champs";  // pour avoir une alerte sous le champs concerné
+        return false;
+      }
+      };
+    
+    function controleAddress(){
+      //Controle de l'adresse
+      const addressInputcontrole = addressInput.value;
+      if(/^[a-zA-Z0-9.,-_ ]{5,50}[ ]{0,2}$/.test(addressInputcontrole)){
+        document.getElementById('addressErrorMsg').textContent = ""; // si ok, ne plus afficher le message d'alerte
+        return true;
+      }else{
+        document.getElementById('addressErrorMsg').textContent = "Veuillez remplir ce champs";  // pour avoir une alerte sous le champs concerné
+        return false;
+      }
+      };
+    
+    function controleCity(){
+      //Controle de la ville
+      const cityInputcontrole = cityInput.value;
+      if(/^[A-Za-z][A-Za-z\é\è\ê\ë\ï\œ\-\s]+$/.test(cityInputcontrole)){
+        document.getElementById('cityErrorMsg').textContent = ""; // si ok, ne plus afficher le message d'alerte
+        return true;
+      }else{
+        document.getElementById('cityErrorMsg').textContent = "Veuillez remplir ce champs";  // pour avoir une alerte sous le champs concerné
+        return false;
+      }
+      };
+      
+    function controleEmail(){
+      //Controle de l'email
+      const emailInputcontrole = emailInput.value;
+      if(/^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,4}$/.test(emailInputcontrole)){
+        document.getElementById('emailErrorMsg').textContent = ""; // si ok, ne plus afficher le message d'alerte
+        return true;
+      }else{
+        document.getElementById('emailErrorMsg').textContent = "Veuillez remplir ce champs";  //pour avoir une alerte sous le champs concerné
+        return false;
+      }
+    };
+    
+    //Explication Regex: 
+    //'^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z][2,10]$', 'g'
+        //^ début de la chaîne de caractère autorisée 
         //[a-z: de a à z en minuscule, de A-Z en majuscule 0-9: des chiffres de 0à 9, .-_ : caractères autorisés]
         //\w: Indique un caractère alphanumérique ou un tiret de soulignement. Cela correspond à taper [a-zA-Z0-9_]
         //+ permet de dire que ces caractères peuvent être écrit une fois ou plrs fois
@@ -230,3 +284,18 @@ localStorage.setItem('contact', JSON.stringify(informations)); // JSON.stringify
         // [a-z]: signfie qu'après le . uniquement en minuscule [2,10} et nombre de lettres autorisées : 2min 10max
         // $ fin de notre expresion régulière
         // lors d'une regexp, il faut un marqueur => comment lire la regexp : 'g' pour global 
+    
+    
+    if(localStoragepanier ===0 || localStoragepanier === null){
+        alert('Votre panier est actuellement vide, vous ne pouvez pas commander');
+    }
+    else{
+        if (controlePrenom() && controleNom() && controleAddress() && controleCity() && controleEmail()){ // il faut que les fonctions soient true (&&)
+    //Récupération du formulaire pour le mettre ds le local storage
+        localStorage.setItem('informations', JSON.stringify(informations)); // JSON.stringify=> convertir l'objet (formulaire) en chaine de caractères
+    } else{
+      alert("Merci de bien renseigner le formulaire de contact");
+    }
+    }
+    })
+    
