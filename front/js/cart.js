@@ -204,9 +204,11 @@ firstNameInput.addEventListener("change", function(){ //écoute de l'événement
     const firstNameInputcontrole = firstNameInput.value;
     if(/^[A-Za-z][A-Za-z\é\è\ê\ë\ï\œ\-\s]+$/.test(firstNameInputcontrole)){
       document.getElementById('firstNameErrorMsg').textContent = ""; // si ok, ne plus afficher le message d'alerte
+      firstNameInput.setAttribute('style', 'border:3px solid green');
       return true;
     }else{
       document.getElementById('firstNameErrorMsg').textContent = "Veuillez renseigner votre Prénom. (Minimum 2 caractères, chiffres et symboles spéciaux interdits)";  // pour avoir une alerte sous le champs concerné
+      firstNameInput.setAttribute('style', 'border:3px solid #FF0000');
       return false;
     }
     }; 
@@ -224,9 +226,11 @@ lastNameInput.addEventListener("change", function(){ //écoute de l'événement 
       const lastNameInputcontrole = lastNameInput.value;
       if(/^[A-Za-z][A-Za-z\é\è\ê\ë\ï\œ\-\s]+$/.test(lastNameInputcontrole)){
         document.getElementById('lastNameErrorMsg').textContent = ""; // si ok, ne plus afficher le message d'alerte
+        lastNameInput.setAttribute('style', 'border:3px solid green');
         return true;
       }else{
         document.getElementById('lastNameErrorMsg').textContent = "Veuillez renseigner votre Nom. (Minimum 2 caractères, chiffres et symboles spéciaux interdits)";  // pour avoir une alerte sous le champs concerné
+        lastNameInput.setAttribute('style', 'border:3px solid #FF0000');
         return false;
       }
       };
@@ -242,9 +246,11 @@ addressInput.addEventListener("change", function(){ //écoute de l'événement c
       const addressInputcontrole = addressInput.value;
       if(/^[a-zA-Z0-9.,-_ ]{5,50}[ ]{0,2}$/.test(addressInputcontrole)){
         document.getElementById('addressErrorMsg').textContent = ""; // si ok, ne plus afficher le message d'alerte
+        addressInput.setAttribute('style', 'border:3px solid green');
         return true;
       }else{
         document.getElementById('addressErrorMsg').textContent = "Veuillez renseigner votre adresse. (Minimum 5 caractères, symboles spéciaux interdits)";  // pour avoir une alerte sous le champs concerné
+        addressInput.setAttribute('style', 'border:3px solid #FF0000');
         return false;
       }
       };
@@ -260,9 +266,11 @@ cityInput.addEventListener("change", function(){ //écoute de l'événement chan
       const cityInputcontrole = cityInput.value;
       if(/^[A-Za-z][A-Za-z\é\è\ê\ë\ï\œ\-\s]+$/.test(cityInputcontrole)){
         document.getElementById('cityErrorMsg').textContent = ""; // si ok, ne plus afficher le message d'alerte
+        cityInput.setAttribute('style', 'border:3px solid green');
         return true;
       }else{
         document.getElementById('cityErrorMsg').textContent = "Veuillez renseigner la ville. (Minimum 2 caractères, chiffres et symboles spéciaux interdits)";  // pour avoir une alerte sous le champs concerné
+        cityInput.setAttribute('style', 'border:3px solid #FF0000');
         return false;
       }
       };
@@ -278,9 +286,11 @@ emailInput.addEventListener("change", function(){ //écoute de l'événement cha
       const emailInputcontrole = emailInput.value;
       if(/^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,4}$/.test(emailInputcontrole)){
         document.getElementById('emailErrorMsg').textContent = ""; // si ok, ne plus afficher le message d'alerte
+        emailInput.setAttribute('style', 'border:3px solid green');
         return true;
       }else{
         document.getElementById('emailErrorMsg').textContent = "Veuillez renseigner votre adresse mail. Celle-ci doit être composée telle que test@domaine.com";  //pour avoir une alerte sous le champs concerné
+        emailInput.setAttribute('style', 'border:3px solid #FF0000');
         return false;
       }
     };
