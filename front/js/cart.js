@@ -183,96 +183,109 @@ totalPanier();
    Récupération et Validation des données dans le formulaire puis stockage dans le Local Strorage
 ****************************************************************************************************/
 
-///Déclaration des constantes pour séléctionner dans le DOM 
+//Déclaration des constantes pour séléctionner dans le DOM 
 const firstNameInput = document.getElementById('firstName');
-
 const lastNameInput = document.getElementById('lastName');
-
 const addressInput = document.getElementById('address');
-
 const cityInput = document.getElementById('city');
-
 const emailInput = document.getElementById('email');
-  
 
-// on vient cibler le btn 'commander' du formulaire
-const orderBouton = document.getElementById('order');
 
-//au click
-orderBouton.addEventListener('click', (event) => {
-event.preventDefault();
-
-let informations = {   //Récupérer les valeurs du formulaire dans un objet / une seule clé
-  firstName: firstNameInput.value, //document.getElementById('firstName').value
-  lastName: lastNameInput.value,
-  address: addressInput.value,
-  city: cityInput.value,
-  email: emailInput.value
-};
+/**** Pour le Prénom ******/
+//Contrôle du prénom dès le changement de l'élément Html 
+firstNameInput.addEventListener("change", function(){ //écoute de l'événement change sur l'input prénom
+    let inputValue = this.value; //variable qui définit la valeur modifiée
+    controlePrenom(inputValue); //permet de lancer la fonction de contrôle 
+});
 
   //Utilisation des Regex pour verifier les données des champs du formulaire & affichage d'un message d'erreur si besoin  
 
   function controlePrenom(){
-    //Controle du prenom
     const firstNameInputcontrole = firstNameInput.value;
     if(/^[A-Za-z][A-Za-z\é\è\ê\ë\ï\œ\-\s]+$/.test(firstNameInputcontrole)){
       document.getElementById('firstNameErrorMsg').textContent = ""; // si ok, ne plus afficher le message d'alerte
       return true;
     }else{
-      document.getElementById('firstNameErrorMsg').textContent = "Veuillez remplir ce champs";  // pour avoir une alerte sous le champs concerné
+      document.getElementById('firstNameErrorMsg').textContent = "Veuillez renseigner votre Prénom. (Minimum 2 caractères, chiffres et symboles spéciaux interdits)";  // pour avoir une alerte sous le champs concerné
       return false;
     }
-    };
-    
+    }; 
+
+/**** Pour le Nom ******/
+
+//Contrôle du Nom dès le changement de l'élément Html 
+lastNameInput.addEventListener("change", function(){ //écoute de l'événement change sur l'input nom
+    let inputValue = this.value; //variable qui définit la valeur modifiée
+    controleNom(inputValue); //permet de lancer la fonction de contrôle 
+});
+
+//Utilisation des Regex pour verifier les données des champs du formulaire & affichage d'un message d'erreur si besoin  
     function controleNom(){
-      //Controle du nom
       const lastNameInputcontrole = lastNameInput.value;
       if(/^[A-Za-z][A-Za-z\é\è\ê\ë\ï\œ\-\s]+$/.test(lastNameInputcontrole)){
         document.getElementById('lastNameErrorMsg').textContent = ""; // si ok, ne plus afficher le message d'alerte
         return true;
       }else{
-        document.getElementById('lastNameErrorMsg').textContent = "Veuillez remplir ce champs";  // pour avoir une alerte sous le champs concerné
+        document.getElementById('lastNameErrorMsg').textContent = "Veuillez renseigner votre Nom. (Minimum 2 caractères, chiffres et symboles spéciaux interdits)";  // pour avoir une alerte sous le champs concerné
         return false;
       }
       };
-    
+
+/**** Pour l'Adresse ******/
+//Contrôle de l'adresse dès le changement de l'élément Html 
+addressInput.addEventListener("change", function(){ //écoute de l'événement change sur l'input d'adresse
+    let inputValue = this.value; //variable qui définit la valeur modifiée
+    controleAddress(inputValue); //permet de lancer la fonction de contrôle 
+});
+//Utilisation des Regex pour verifier les données des champs du formulaire & affichage d'un message d'erreur si besoin 
     function controleAddress(){
-      //Controle de l'adresse
       const addressInputcontrole = addressInput.value;
       if(/^[a-zA-Z0-9.,-_ ]{5,50}[ ]{0,2}$/.test(addressInputcontrole)){
         document.getElementById('addressErrorMsg').textContent = ""; // si ok, ne plus afficher le message d'alerte
         return true;
       }else{
-        document.getElementById('addressErrorMsg').textContent = "Veuillez remplir ce champs";  // pour avoir une alerte sous le champs concerné
+        document.getElementById('addressErrorMsg').textContent = "Veuillez renseigner votre adresse. (Minimum 5 caractères, symboles spéciaux interdits)";  // pour avoir une alerte sous le champs concerné
         return false;
       }
       };
-    
+
+/**** Pour la ville ******/
+//Contrôle de la ville dès le changement de l'élément Html 
+cityInput.addEventListener("change", function(){ //écoute de l'événement change sur l'input ville 
+    let inputValue = this.value; //variable qui définit la valeur modifiée
+    controleCity(inputValue); //permet de lancer la fonction de contrôle 
+});
+//Utilisation des Regex pour verifier les données des champs du formulaire & affichage d'un message d'erreur si besoin 
     function controleCity(){
-      //Controle de la ville
       const cityInputcontrole = cityInput.value;
       if(/^[A-Za-z][A-Za-z\é\è\ê\ë\ï\œ\-\s]+$/.test(cityInputcontrole)){
         document.getElementById('cityErrorMsg').textContent = ""; // si ok, ne plus afficher le message d'alerte
         return true;
       }else{
-        document.getElementById('cityErrorMsg').textContent = "Veuillez remplir ce champs";  // pour avoir une alerte sous le champs concerné
+        document.getElementById('cityErrorMsg').textContent = "Veuillez renseigner la ville. (Minimum 2 caractères, chiffres et symboles spéciaux interdits)";  // pour avoir une alerte sous le champs concerné
         return false;
       }
       };
-      
+
+/**** Pour l'Email ******/
+//Contrôle de l'emal dès le changement de l'élément Html 
+emailInput.addEventListener("change", function(){ //écoute de l'événement change sur l'input email
+    let inputValue = this.value; //variable qui définit la valeur modifiée
+    controleEmail(inputValue); //permet de lancer la fonction de contrôle 
+});
+//Utilisation des Regex pour verifier les données des champs du formulaire & affichage d'un message d'erreur si besoin 
     function controleEmail(){
-      //Controle de l'email
       const emailInputcontrole = emailInput.value;
       if(/^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,4}$/.test(emailInputcontrole)){
         document.getElementById('emailErrorMsg').textContent = ""; // si ok, ne plus afficher le message d'alerte
         return true;
       }else{
-        document.getElementById('emailErrorMsg').textContent = "Veuillez remplir ce champs";  //pour avoir une alerte sous le champs concerné
+        document.getElementById('emailErrorMsg').textContent = "Veuillez renseigner votre adresse mail. Celle-ci doit être composée telle que test@domaine.com";  //pour avoir une alerte sous le champs concerné
         return false;
       }
     };
-    
-    //Explication Regex: 
+
+/***********ZOOM : Explication Regex:***********/
     //'^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z][2,10]$', 'g'
         //^ début de la chaîne de caractère autorisée 
         //[a-z: de a à z en minuscule, de A-Z en majuscule 0-9: des chiffres de 0à 9, .-_ : caractères autorisés]
@@ -284,18 +297,47 @@ let informations = {   //Récupérer les valeurs du formulaire dans un objet / u
         // [a-z]: signfie qu'après le . uniquement en minuscule [2,10} et nombre de lettres autorisées : 2min 10max
         // $ fin de notre expresion régulière
         // lors d'une regexp, il faut un marqueur => comment lire la regexp : 'g' pour global 
-    
-    
-    if(localStoragepanier ===0 || localStoragepanier === null){
+/***********Fin : Explication Regex:***********/    
+
+
+/***************************************************************************************************
+   L'utilisateur valide le formulaire (order)
+****************************************************************************************************/
+// on vient cibler le btn 'commander' du formulaire
+const orderBotton = document.getElementById('order');
+
+//au click du bouton commander par l'utilisateur
+orderBotton.addEventListener('click', (event) => {
+event.preventDefault();
+
+//au click récupération des valeurs du formulaire dans un objet / une seule clé
+let informations = {
+    firstName: firstNameInput.value,
+    lastName: lastNameInput.value,
+    address: addressInput.value,
+    city: cityInput.value,
+    email: emailInput.value
+  };
+
+//Conditions devant être respectée pour commander 
+
+    if(localStoragepanier ==0 || localStoragepanier ==null){
         alert('Votre panier est actuellement vide, vous ne pouvez pas commander');
     }
     else{
         if (controlePrenom() && controleNom() && controleAddress() && controleCity() && controleEmail()){ // il faut que les fonctions soient true (&&)
     //Récupération du formulaire pour le mettre ds le local storage
-        localStorage.setItem('informations', JSON.stringify(informations)); // JSON.stringify=> convertir l'objet (formulaire) en chaine de caractères
-    } else{
-      alert("Merci de bien renseigner le formulaire de contact");
+        localStorage.setItem('informations', JSON.stringify(informations)); // JSON.stringify=> convertir l'objet (Information) en chaine de caractères
+        } else{
+        alert("Merci de verifier le formulaire de contact, toutes les informations doivent être correctement renseigneés");
+        }
     }
-    }
-    })
+
+})
     
+
+
+ 
+
+
+
