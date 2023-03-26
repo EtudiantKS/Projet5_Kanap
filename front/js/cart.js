@@ -200,16 +200,16 @@ firstNameInput.addEventListener("change", function(){ //écoute de l'événement
 
   //Utilisation des Regex pour verifier les données des champs du formulaire & affichage d'un message d'erreur si besoin  
 
-  function controlePrenom(){
+function controlePrenom(){
     const firstNameInputcontrole = firstNameInput.value;
     if(/^[A-Za-z][A-Za-z\é\è\ê\ë\ï\œ\-\s]+$/.test(firstNameInputcontrole)){
-      document.getElementById('firstNameErrorMsg').textContent = ""; // si ok, ne plus afficher le message d'alerte
-      firstNameInput.setAttribute('style', 'border:3px solid green');
-      return true;
+        document.getElementById('firstNameErrorMsg').textContent = ""; // si ok, ne plus afficher le message d'alerte
+        firstNameInput.setAttribute('style', 'border:3px solid green');
+        return true;
     }else{
-      document.getElementById('firstNameErrorMsg').textContent = "Veuillez renseigner votre Prénom. (Minimum 2 caractères, chiffres et symboles spéciaux interdits)";  // pour avoir une alerte sous le champs concerné
-      firstNameInput.setAttribute('style', 'border:3px solid #FF0000');
-      return false;
+        document.getElementById('firstNameErrorMsg').textContent = "Veuillez renseigner votre Prénom. (Minimum 2 caractères, chiffres et symboles spéciaux interdits)";  // pour avoir une alerte sous le champs concerné
+        firstNameInput.setAttribute('style', 'border:3px solid #FF0000');
+        return false;
     }
     }; 
 
@@ -223,17 +223,17 @@ lastNameInput.addEventListener("change", function(){ //écoute de l'événement 
 
 //Utilisation des Regex pour verifier les données des champs du formulaire & affichage d'un message d'erreur si besoin  
     function controleNom(){
-      const lastNameInputcontrole = lastNameInput.value;
-      if(/^[A-Za-z][A-Za-z\é\è\ê\ë\ï\œ\-\s]+$/.test(lastNameInputcontrole)){
+    const lastNameInputcontrole = lastNameInput.value;
+    if(/^[A-Za-z][A-Za-z\é\è\ê\ë\ï\œ\-\s]+$/.test(lastNameInputcontrole)){
         document.getElementById('lastNameErrorMsg').textContent = ""; // si ok, ne plus afficher le message d'alerte
         lastNameInput.setAttribute('style', 'border:3px solid green');
         return true;
-      }else{
+    }else{
         document.getElementById('lastNameErrorMsg').textContent = "Veuillez renseigner votre Nom. (Minimum 2 caractères, chiffres et symboles spéciaux interdits)";  // pour avoir une alerte sous le champs concerné
         lastNameInput.setAttribute('style', 'border:3px solid #FF0000');
         return false;
-      }
-      };
+    }
+    };
 
 /**** Pour l'Adresse ******/
 //Contrôle de l'adresse dès le changement de l'élément Html 
@@ -243,17 +243,17 @@ addressInput.addEventListener("change", function(){ //écoute de l'événement c
 });
 //Utilisation des Regex pour verifier les données des champs du formulaire & affichage d'un message d'erreur si besoin 
     function controleAddress(){
-      const addressInputcontrole = addressInput.value;
-      if(/^[a-zA-Z0-9.,-_ ]{5,50}[ ]{0,2}$/.test(addressInputcontrole)){
+    const addressInputcontrole = addressInput.value;
+    if(/^[a-zA-Z0-9.\é\è\ê\ë\ï\œ\â,-_ ]{5,50}[ ]{0,2}$/.test(addressInputcontrole)){
         document.getElementById('addressErrorMsg').textContent = ""; // si ok, ne plus afficher le message d'alerte
         addressInput.setAttribute('style', 'border:3px solid green');
         return true;
-      }else{
+    }else{
         document.getElementById('addressErrorMsg').textContent = "Veuillez renseigner votre adresse. (Minimum 5 caractères, symboles spéciaux interdits)";  // pour avoir une alerte sous le champs concerné
         addressInput.setAttribute('style', 'border:3px solid #FF0000');
         return false;
-      }
-      };
+    }
+    };
 
 /**** Pour la ville ******/
 //Contrôle de la ville dès le changement de l'élément Html 
@@ -263,17 +263,17 @@ cityInput.addEventListener("change", function(){ //écoute de l'événement chan
 });
 //Utilisation des Regex pour verifier les données des champs du formulaire & affichage d'un message d'erreur si besoin 
     function controleCity(){
-      const cityInputcontrole = cityInput.value;
-      if(/^[A-Za-z][A-Za-z\é\è\ê\ë\ï\œ\-\s]+$/.test(cityInputcontrole)){
+    const cityInputcontrole = cityInput.value;
+    if(/^[A-Za-z][A-Za-z\é\è\ê\ë\ï\œ\â\-\s]+$/.test(cityInputcontrole)){
         document.getElementById('cityErrorMsg').textContent = ""; // si ok, ne plus afficher le message d'alerte
         cityInput.setAttribute('style', 'border:3px solid green');
         return true;
-      }else{
+    }else{
         document.getElementById('cityErrorMsg').textContent = "Veuillez renseigner la ville. (Minimum 2 caractères, chiffres et symboles spéciaux interdits)";  // pour avoir une alerte sous le champs concerné
         cityInput.setAttribute('style', 'border:3px solid #FF0000');
         return false;
-      }
-      };
+    }
+    };
 
 /**** Pour l'Email ******/
 //Contrôle de l'emal dès le changement de l'élément Html 
@@ -283,16 +283,16 @@ emailInput.addEventListener("change", function(){ //écoute de l'événement cha
 });
 //Utilisation des Regex pour verifier les données des champs du formulaire & affichage d'un message d'erreur si besoin 
     function controleEmail(){
-      const emailInputcontrole = emailInput.value;
-      if(/^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,4}$/.test(emailInputcontrole)){
+    const emailInputcontrole = emailInput.value;
+    if(/^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,4}$/.test(emailInputcontrole)){
         document.getElementById('emailErrorMsg').textContent = ""; // si ok, ne plus afficher le message d'alerte
         emailInput.setAttribute('style', 'border:3px solid green');
         return true;
-      }else{
+    }else{
         document.getElementById('emailErrorMsg').textContent = "Veuillez renseigner votre adresse mail. Celle-ci doit être composée telle que test@domaine.com";  //pour avoir une alerte sous le champs concerné
         emailInput.setAttribute('style', 'border:3px solid #FF0000');
         return false;
-      }
+    }
     };
 
 /***********ZOOM : Explication Regex:***********/
@@ -312,38 +312,81 @@ emailInput.addEventListener("change", function(){ //écoute de l'événement cha
 
 /***************************************************************************************************
    L'utilisateur valide le formulaire (order)
+   Objet contact (les données du formulaire) et un tableau des produits
 ****************************************************************************************************/
 // on vient cibler le btn 'commander' du formulaire
-const orderBotton = document.getElementById('order');
+const orderButton = document.getElementById('order');
 
 //au click du bouton commander par l'utilisateur
-orderBotton.addEventListener('click', (event) => {
-event.preventDefault();
+orderButton.addEventListener('click', (event) => {
+    event.preventDefault();
 
-//au click récupération des valeurs du formulaire dans un objet / une seule clé
-let informations = {
+//Création d'un tableau des ID des articles du panier 
+
+let ids = [];
+for (let a = 0; a < localStoragepanier.length; a++){
+    ids.push(localStoragepanier[a].id);
+}
+//au click récupération des valeurs du formulaire dans un objet (contact)
+const FormContact = {
+    contact: {
     firstName: firstNameInput.value,
     lastName: lastNameInput.value,
     address: addressInput.value,
     city: cityInput.value,
-    email: emailInput.value
-  };
+    email: emailInput.value,
+    },
+    // tableau de la liste des IDs à envoyer
+    products: ids,
+};
 
-//Conditions devant être respectée pour commander 
+    //Conditions devant être respectées pour commander 
 
+    // l'utilisateur ne peut pas pas passer de commande si le panier est vide
     if(localStoragepanier ==0 || localStoragepanier ==null){
         alert('Votre panier est actuellement vide, vous ne pouvez pas commander');
     }
+    // si le panier n'est pas vide alors  : 
     else{
         if (controlePrenom() && controleNom() && controleAddress() && controleCity() && controleEmail()){ // il faut que les fonctions soient true (&&)
-    //Récupération du formulaire pour le mettre ds le local storage
-        localStorage.setItem('informations', JSON.stringify(informations)); // JSON.stringify=> convertir l'objet (Information) en chaine de caractères
-        } else{
+        //Récupération du formulaire pour le mettre ds le local storage
+        localStorage.setItem('contact', JSON.stringify(FormContact)); // JSON.stringify=> convertir l'objet (contact) en chaine de caractères
+        //Appel de la fonction pour envoyer les données au serveur
+        sendServer(FormContact);
+        alert("Votre commande a bien été effectuée !");
+        }else{
         alert("Merci de verifier le formulaire de contact, toutes les informations doivent être correctement renseigneés");
         }
     }
+});
+   
 
-})
+/***************************************************************************************************
+  Envoi des informations au serveur (utilisation de la méthode POST)
+****************************************************************************************************/
+    //fonction pour envoyer les produits et les informations sur le serveur: 
+        //le tableau des produits envoyé au back-end est sous forme d'un array de strings product-ID.
+        //l'objet contact envoyé au serveur doit être constitué des champs : (firstname, lastname, address, city et email)
+    
+    async function sendServer(FormContact) {
+        await fetch('http://localhost:3000/api/products/order', {
+            method: 'POST',
+            body: JSON.stringify(FormContact), // clefs contact et products
+            headers: {'Content-Type': 'application/json'},
+        })
+        // Récupèration et stockage de la réponse de l'API (orderId)
+        .then((res) => res.json ()) // récupération du résultat de la requête au format json 
+        .then((data) => { //et avec ces données
+            const orderId = data.orderId;
+            console.log(orderId);
+            //window.location.href = 'confirmation.html?orderId=' + orderId; //redirection vers page confirmation avec l'id dans l'url
+        })
+		.catch((err) => {
+			console.error(err);
+			alert('erreur: ' + err);
+		});
+    }
+
     
 
 
