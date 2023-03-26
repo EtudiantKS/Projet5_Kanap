@@ -379,7 +379,7 @@ const FormContact = {
         .then((data) => { //et avec ces données
             const orderId = data.orderId;
             console.log(orderId);
-            //window.location.href = 'confirmation.html?orderId=' + orderId; //redirection vers page confirmation avec l'id dans l'url
+            window.location.href = 'confirmation.html?orderId=' + orderId; //redirection vers page confirmation avec l'id dans l'url
         })
 		.catch((err) => {
 			console.error(err);
