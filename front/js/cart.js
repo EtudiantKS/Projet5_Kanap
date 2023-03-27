@@ -67,6 +67,7 @@ async function displayPanier (){
         
             changeQuantity();
             deleteProduct();
+            totalPanier(); //déclaration de la fonction asynchrone 
         }
     }
 }
@@ -95,6 +96,7 @@ function changeQuantity() {
                 quantity: parseInt(newarticleQuantity),
             }
             //Si la quantité ne respecte pas les conditions suivantes, alors alerte à l'utilisateur
+            //if(newarticleQuantity> 100 || newarticleQuantity <= 0|| newarticleQuantity === ""){
             if(newarticleQuantity> 100 || newarticleQuantity <= 0|| newarticleQuantity === ""){
                 alert (`Merci de sélectionner une quantité valide. La quantité doit être comprise en 1 et 100`);
             }
@@ -156,9 +158,9 @@ async function totalPanier() {
 
 
     //L'opérateur d'inégalité (!=) vérifie si les deux opérandes ne sont pas égaux 
-    if(localStoragepanier !=0 || localStoragepanier != null){
+    if(localStoragepanier !=0 || localStoragepanier != null ){
         //boucle pour récupérer l'ensemble des informations du LS et API 
-        for(i=0; i<localStoragepanier.length; i++){
+        for(let i=0; i<localStoragepanier.length; i++){
             let article = localStoragepanier[i]
             //Constante pour les informations des articles
             let productData = await getProduct(article.id);
@@ -176,8 +178,6 @@ async function totalPanier() {
     finalPrice.innerHTML =  priceTotal;
 }
 
- //déclaration de la fonction asynchrone 
-totalPanier();
 
 /***************************************************************************************************
    Récupération et Validation des données dans le formulaire puis stockage dans le Local Strorage
@@ -321,26 +321,7 @@ const orderButton = document.getElementById('order');
 orderButton.addEventListener('click', (event) => {
     event.preventDefault();
 
-//Création d'un tableau des ID des articles du panier 
-
-let ids = [];
-for (let a = 0; a < localStoragepanier.length; a++){
-    ids.push(localStoragepanier[a].id);
-}
-//au click récupération des valeurs du formulaire dans un objet (contact)
-const FormContact = {
-    contact: {
-    firstName: firstNameInput.value,
-    lastName: lastNameInput.value,
-    address: addressInput.value,
-    city: cityInput.value,
-    email: emailInput.value,
-    },
-    // tableau de la liste des IDs à envoyer
-    products: ids,
-};
-
-    //Conditions devant être respectées pour commander 
+    //Conditions devant être respectées pour commander: 
 
     // l'utilisateur ne peut pas pas passer de commande si le panier est vide
     if(localStoragepanier ==0 || localStoragepanier ==null){
@@ -349,8 +330,27 @@ const FormContact = {
     // si le panier n'est pas vide alors  : 
     else{
         if (controlePrenom() && controleNom() && controleAddress() && controleCity() && controleEmail()){ // il faut que les fonctions soient true (&&)
+        
+        //Création d'un tableau des ID des articles du panier 
+            let ids = [];
+            for (let a = 0; a < localStoragepanier.length; a++){
+            ids.push(localStoragepanier[a].id);
+            }
+            //au click récupération des valeurs du formulaire dans un objet (contact)
+            const FormContact = {
+                contact: {
+                firstName: firstNameInput.value,
+                lastName: lastNameInput.value,
+                address: addressInput.value,
+                city: cityInput.value,
+                email: emailInput.value,
+                },
+                // tableau de la liste des IDs à envoyer
+                products: ids,
+            };
         //Récupération du formulaire pour le mettre ds le local storage
         localStorage.setItem('contact', JSON.stringify(FormContact)); // JSON.stringify=> convertir l'objet (contact) en chaine de caractères
+        
         //Appel de la fonction pour envoyer les données au serveur
         sendServer(FormContact);
         alert("Votre commande a bien été effectuée !");
@@ -368,8 +368,8 @@ const FormContact = {
         //le tableau des produits envoyé au back-end est sous forme d'un array de strings product-ID.
         //l'objet contact envoyé au serveur doit être constitué des champs : (firstname, lastname, address, city et email)
     
-    async function sendServer(FormContact) {
-        await fetch('http://localhost:3000/api/products/order', {
+    function sendServer(FormContact) {
+        fetch('http://localhost:3000/api/products/order', {
             method: 'POST',
             body: JSON.stringify(FormContact), // clefs contact et products
             headers: {'Content-Type': 'application/json'},
