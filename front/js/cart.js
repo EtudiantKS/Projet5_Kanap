@@ -141,7 +141,7 @@ function deleteProduct() {
                 localStorage.setItem("panier", JSON.stringify(localStoragepanier));
 
                 //alert pour avertir que le produit a été supprimer & rafraîchissement de la page 
-                alert("Le produit a bien été supprimer du panier"); 
+                alert("Le produit a bien été supprimé du panier"); 
                 window.location.href = "cart.html"
 
             });
